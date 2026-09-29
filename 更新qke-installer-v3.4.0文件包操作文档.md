@@ -73,6 +73,7 @@ bash scripts/download-installer-files.sh
 **下载到本地**（`installer-work/origin/`，只做备份）：
 
 ```bash
+mkdir -p installer-work/origin/
 rclone copy qingstor:qkeplus/qke-installer-v3.4.0.tar.gz installer-work/origin/
 ```
 
@@ -104,6 +105,7 @@ bash scripts/verify-checksums.sh
 **从备份拷贝基础包到 staging/**：
 
 ```bash
+mkdir -p installer-work/staging/
 cp installer-work/origin/qke-installer-v3.4.0.tar.gz installer-work/staging/
 ```
 
