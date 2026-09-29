@@ -148,6 +148,9 @@ qke-installer/
 ```
 qke-artifacts/
 ├── README.md                                  # 本综合文档
+├── AGENTS.md                                  # AI agent 工作指南
+├── CONTEXT.md                                 # 领域模型/术语表
+├── CHANGELOG.md                               # 变更记录
 ├── 更新qke-installer-v3.4.0文件包操作文档.md    # 文件包更新操作文档（参考）
 ├── 镜像离线保存与推送操作文档.md                # 镜像离线保存与推送详细文档（参考）
 ├── 青云公有云环境调整记录.md                    # 青云公有云环境调整记录（参考）
