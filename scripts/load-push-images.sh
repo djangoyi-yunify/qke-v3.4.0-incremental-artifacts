@@ -41,6 +41,11 @@ if ! command -v crane >/dev/null 2>&1; then
     exit 1
 fi
 
+if [[ ! -d "${TAR_DIR}" ]]; then
+    echo "[ERROR] 未找到 tar 目录: ${TAR_DIR}（请先运行 save-images.sh 或拷贝离线镜像）" >&2
+    exit 1
+fi
+
 if [[ -n "${USERNAME}" && -n "${PASSWORD}" ]]; then
     echo "==> 登录 ${REGISTRY}（login 报 unauthorized 可忽略）"
     crane auth login "${REGISTRY}" -u "${USERNAME}" -p "${PASSWORD}" || true

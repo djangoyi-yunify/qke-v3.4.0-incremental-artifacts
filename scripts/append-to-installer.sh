@@ -29,11 +29,11 @@ if [[ $# -lt 2 ]]; then
     exit 1
 fi
 
-BASE_TAR_GZ="$(cd "$(dirname "$1")" && pwd)/$(basename "$1")"
-ADD_DIR="$(cd "$2" && pwd)"
+BASE_TAR_GZ="$1"
+ADD_DIR="$2"
 OUTPUT="${3:-$(dirname "${BASE_TAR_GZ}")/qke-installer-v3.4.0-new.tar.gz}"
-OUTPUT="$(cd "$(dirname "${OUTPUT}")" && pwd)/$(basename "${OUTPUT}")"
 
+# 先校验输入存在，再转绝对路径（避免目录缺失时 cd 报错信息晦涩）
 if [[ ! -f "${BASE_TAR_GZ}" ]]; then
     echo "[ERROR] 未找到基础 tar.gz: ${BASE_TAR_GZ}" >&2
     exit 1
@@ -42,6 +42,14 @@ if [[ ! -d "${ADD_DIR}" ]]; then
     echo "[ERROR] 未找到待添加目录: ${ADD_DIR}" >&2
     exit 1
 fi
+
+BASE_TAR_GZ="$(cd "$(dirname "${BASE_TAR_GZ}")" && pwd)/$(basename "${BASE_TAR_GZ}")"
+ADD_DIR="$(cd "${ADD_DIR}" && pwd)"
+
+# 输出目录不存在则自动创建（installer-work/staging 等可能未随 git 克隆）
+OUTPUT_DIR="$(dirname "${OUTPUT}")"
+mkdir -p "${OUTPUT_DIR}"
+OUTPUT="$(cd "${OUTPUT_DIR}" && pwd)/$(basename "${OUTPUT}")"
 
 WORK_DIR="$(mktemp -d)"
 trap 'rm -rf "${WORK_DIR}"' EXIT
