@@ -1,0 +1,9 @@
+# 二进制文件（不纳入 git 管理）
+*.tar.gz
+*.tar
+
+# 离线镜像（二进制 tar.gz）
+offline-images/
+
+# 打包工作目录（原始包、更新包、下载的二进制依赖）
+installer-work/
